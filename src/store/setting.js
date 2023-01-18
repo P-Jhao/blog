@@ -26,9 +26,7 @@ export default {
       if (resp.favicon) {
         // <link rel="shortcut icon " type="images/x-icon" href="./favicon.ico">
         let link = document.querySelector("link[rel='shortcut icon']");
-        if (link) {
-          return;
-        }
+        if (link) return;
         link = document.createElement("link");
         link.rel = "shortcut icon";
         link.type = "images/x-icon";
