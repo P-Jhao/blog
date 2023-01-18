@@ -8,8 +8,22 @@
       </template>
       <RouterView />
     </Layout>
+    <ToTop />
   </div>
 </template>
+
+<script>
+import SiteAside from "@/components/SiteAside";
+import Layout from "@/components/Layout";
+import ToTop from "@/components/ToTop";
+export default {
+  components: {
+    SiteAside,
+    Layout,
+    ToTop,
+  },
+};
+</script>
 
 <style lang="less" scoped>
 @import "~@/styles/mixin.less";
@@ -21,14 +35,3 @@
   height: 100vh;
 }
 </style>
-
-<script>
-import SiteAside from "@/components/SiteAside";
-import Layout from "@/components/Layout";
-export default {
-  components: {
-    SiteAside,
-    Layout,
-  },
-};
-</script>

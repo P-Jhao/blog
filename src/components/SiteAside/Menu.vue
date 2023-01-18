@@ -3,9 +3,9 @@
     <RouterLink
       :exact="item.exact"
       v-for="item in items"
-      :key="item.link"
+      :key="item.name"
       class="item"
-      :to="item.link"
+      :to="{ name: item.name }"
     >
       <Icon :type="item.icon" />
       <span>{{ item.content }}</span>
@@ -16,7 +16,7 @@
 <style lang="less" scoped>
 @import "~@/styles/var.less";
 .menu-container {
-  margin-top: 40px;
+  margin-top: 30px;
 }
 .item {
   width: 100%;
@@ -45,31 +45,31 @@ export default {
     return {
       items: [
         {
-          link: "/",
+          name: "Home",
           content: "首页",
           icon: "home",
           exact: true,
         },
         {
-          link: "/blog",
+          name: "Blog",
           content: "文章",
           icon: "blog",
           exact: false,
         },
         {
-          link: "/about",
+          name: "About",
           content: "关于我",
           icon: "about",
           exact: true,
         },
         {
-          link: "/project",
+          name: "Project",
           content: "项目&效果",
           icon: "code",
           exact: true,
         },
         {
-          link: "/message",
+          name: "Message",
           content: "留言",
           icon: "chat",
           exact: true,

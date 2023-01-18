@@ -1,9 +1,7 @@
 <template>
   <div class="siteAside-container">
-    <Avatar
-      url="https://th.bing.com/th/id/OIP.dlStk205z9zpv00_FypwfwHaNK?w=187&h=333&c=7&r=0&o=5&pid=1.7"
-    />
-    <h1>彭俊豪的个人博客</h1>
+    <Avatar :url="data && data.avatar" />
+    <h1>{{ loading ? "加载中..." : data.siteTitle }}</h1>
     <Menu />
     <Contact />
   </div>
@@ -25,6 +23,7 @@
     font-size: 1.2em;
     color: #fff;
     text-align: center;
+    margin-top: 16px;
   }
 }
 </style>
@@ -33,12 +32,16 @@
 import Avatar from "@/components/Avatar";
 import Menu from "./Menu";
 import Contact from "./Contact";
+import { mapState } from "vuex";
 
 export default {
   components: {
     Avatar,
     Menu,
     Contact,
+  },
+  computed: {
+    ...mapState("setting", ["loading", "data"]),
   },
 };
 </script>

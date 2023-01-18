@@ -1,6 +1,10 @@
 <template>
-  <div class="home-container" ref="container" @wheel="handleWheel">
-    <Loading v-if="isLoding" />
+  <div
+    class="home-container"
+    ref="container"
+    @wheel="handleWheel"
+    v-loading="loading"
+  >
     <ul
       class="banners-list"
       :style="{ marginTop }"
@@ -32,37 +36,34 @@
 </template>
 
 <script>
-import getBanners from "@/api/banner";
 import CarouselItem from "./CarouselItem";
 import Icon from "@/components/Icon";
-import Loading from "@/components/Loading";
+import { mapState } from "vuex";
+
 export default {
   components: {
     CarouselItem,
-    Loading,
     Icon,
   },
   data() {
     return {
-      banners: [],
       index: 0, //当前图片索引
       clientHeight: 0,
       isSwitch: false, //是否正在切换
-      isLoding: true, //是否正在加载数据
     };
-  },
-  async created() {
-    this.banners = await getBanners();
-    this.isLoding = false;
-  },
-  mounted() {
-    this.clientHeight = this.$refs.container.clientHeight;
-    window.addEventListener("resize", this.handleHomeResize);
   },
   computed: {
     marginTop() {
       return -this.index * this.clientHeight + "px";
     },
+    ...mapState("banner", ["loading", "banners"]),
+  },
+  created() {
+    this.$store.dispatch("banner/fetchBanners");
+  },
+  mounted() {
+    this.clientHeight = this.$refs.container.clientHeight;
+    window.addEventListener("resize", this.handleHomeResize);
   },
   destroyed() {
     window.removeEventListener("resize", this.handleHomeResize);

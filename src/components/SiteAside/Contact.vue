@@ -2,24 +2,24 @@
   <div class="contact-container">
     <div class="item">
       <Icon type="github" />
-      <a href="https://github.com/P-Jhao" target="_blank">PJhao-Github</a>
+      <a :href="data.github" target="_blank">{{ data.githubName }}</a>
     </div>
     <div class="item">
       <Icon type="mail" />
-      <a href="mailto:2212688637@qq.com">2212688637@qq.com</a>
+      <a :href="`mailto:${data.mail}`">{{ data.mail }}</a>
     </div>
     <div class="item">
       <Icon type="qq" />
       <a
-        href="tencent://message/?Menu=yes&uin=2212688637&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45"
-        >2212688637</a
+        :href="`tencent://message/?Menu=yes&uin=${data.qq}&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45`"
+        >{{ data.qq }}</a
       >
     </div>
     <div class="item">
       <Icon type="weixin" class="weixin" />
-      <span>pengjunhao716</span>
+      <span>{{ data.weixin }}</span>
       <div class="pop">
-        <img src="@/assets/myBusiness.jpg" alt="" />
+        <img :src="data.weixinQrCode" alt="" />
       </div>
     </div>
   </div>
@@ -27,9 +27,19 @@
 
 <script>
 import Icon from "@/components/Icon";
+import WxCode from "@/assets/myBusiness.jpg";
+import { mapState } from "vuex";
 export default {
   components: {
     Icon,
+  },
+  data() {
+    return {
+      WxCode,
+    };
+  },
+  computed: {
+    ...mapState("setting", ["data"]),
   },
 };
 </script>
@@ -37,7 +47,7 @@ export default {
 <style lang="less" scoped>
 @import "~@/styles/var.less";
 .contact-container {
-  margin-top: 80px;
+  margin-top: 40px;
   width: 100%;
   color: @gray;
   font-size: 18px;

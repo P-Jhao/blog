@@ -8,6 +8,7 @@ import styles from "./showMessage.module.less";
  * @param {String} type
  * @param {Number} duration
  * @param {HTMLElement} container
+ * @param {Function} callback
  */
 export default function (options = {}) {
   const content = options.content || "";
