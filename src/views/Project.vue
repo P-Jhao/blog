@@ -25,14 +25,22 @@
         </p>
       </div>
     </div>
+    <Empty
+      v-if="!loading && data.length === 0"
+      text="这个人初来乍到，还没有任何拿得出手的项目"
+    />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import { mainScroll } from "@/mixins";
+import Empty from "@/components/Empty";
 export default {
   mixins: [mainScroll("projectContainer")],
+  components: {
+    Empty,
+  },
   computed: {
     ...mapState("project", ["loading", "data"]),
   },

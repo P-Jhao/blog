@@ -45,6 +45,10 @@
         </div>
       </li>
     </ul>
+    <Empty
+      v-if="!isLoading && data.rows.length === 0"
+      text="这个人很懒，还没有写任何文章"
+    />
     <!-- 分页放到这里 -->
     <Pager
       :current="routeInfo.page"
@@ -61,10 +65,12 @@ import Pager from "@/components/Pager";
 import { fetchData, mainScroll } from "@/mixins";
 import { getBlog } from "@/api/blog";
 import formatDate from "@/utils/formatDate";
+import Empty from "@/components/Empty";
 export default {
-  mixins: [fetchData({}), mainScroll("container")],
+  mixins: [fetchData({ total: 0, rows: [] }), mainScroll("container")],
   components: {
     Pager,
+    Empty,
   },
   computed: {
     routeInfo() {

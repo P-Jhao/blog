@@ -4,10 +4,7 @@ import banner from "./banner";
 import setting from "./setting";
 import about from "./about";
 import project from "./project";
-
-if (!window.vuex) {
-  install(Vue);
-}
+install(Vue);
 
 export default new Store({
   modules: {
