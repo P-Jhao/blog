@@ -3,7 +3,7 @@ import App from "./App.vue";
 import "./styles/global.less";
 import router from "@/router";
 import showMessage from "./utils/showMessage";
-import "@/Mock";
+// import "@/Mock";
 import store from "./store";
 //初始加载全局仓库
 store.dispatch("setting/fetchSetting");
