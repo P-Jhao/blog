@@ -4,6 +4,9 @@
     <h1>{{ loading ? "加载中..." : data.siteTitle }}</h1>
     <Menu />
     <Contact />
+    <p v-if="data" class="footer">
+      {{ data.icp }}
+    </p>
   </div>
 </template>
 
@@ -25,6 +28,10 @@
     text-align: center;
     margin-top: 16px;
   }
+}
+.footer {
+  text-align: center;
+  font-size: 12px;
 }
 </style>
 
