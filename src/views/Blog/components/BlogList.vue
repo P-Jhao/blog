@@ -114,14 +114,16 @@ export default {
     },
   },
   watch: {
-    async $route() {
+    $route() {
       this.isLoading = true;
-      this.data = await this.fetchData(
+      this.fetchData(
         this.routeInfo.page,
         this.routeInfo.limit,
         this.routeInfo.categoryId
-      );
-      this.isLoading = false;
+      ).then((res) => {
+        this.data = res;
+        this.isLoading = false;
+      });
     },
   },
 };

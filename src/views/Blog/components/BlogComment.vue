@@ -41,14 +41,15 @@ export default {
       return await getComments(this.$route.params.id, this.page, this.limit);
     },
     //获取更多评论
-    async getMoreData() {
+    getMoreData() {
       if (!this.hasMoreData) return;
       this.page++;
       this.isLoading = true;
-      const moreData = await this.fetchData();
-      this.data.total = moreData.total;
-      this.data.rows = this.data.rows.concat(moreData.rows);
-      this.isLoading = false;
+      this.fetchData().then((moreData) => {
+        this.data.total = moreData.total;
+        this.data.rows = this.data.rows.concat(moreData.rows);
+        this.isLoading = false;
+      });
     },
     handleScroll(dom) {
       //判断是否正在加载
@@ -59,14 +60,17 @@ export default {
         this.getMoreData();
       }
     },
-    async hanldSubmit(formData, callback) {
-      const resp = await subComment({
+    hanldSubmit(formData, callback) {
+      console.log(formData, "formData");
+      subComment({
         blogId: this.$route.params.id,
         ...formData,
+      }).then((resp) => {
+        console.log(resp, "blogCommentResp");
+        this.data.rows.unshift(resp);
+        this.data.total++;
+        callback("评论成功"); //处理完毕
       });
-      this.data.rows.unshift(resp);
-      this.data.total++;
-      callback("评论成功"); //处理完毕
     },
   },
 };

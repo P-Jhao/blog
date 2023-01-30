@@ -24,6 +24,11 @@ export default {
   components: {
     Avatar,
   },
+  watch: {
+    list(newVal) {
+      console.log(newVal, "dataList List");
+    },
+  },
   methods: {
     formatDate,
   },

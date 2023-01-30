@@ -30,13 +30,14 @@ export default {
   },
   methods: {
     async fetchData() {
-      const resp = await getSingleBlog(this.$route.params.id);
-      if (!resp) {
-        //文章不存在
-        this.$router.push("/404");
-        return;
-      }
-      return resp;
+      getSingleBlog(this.$route.params.id).then((resp) => {
+        if (!resp) {
+          //文章不存在
+          this.$router.push("/404");
+          return;
+        }
+        return resp;
+      });
     },
   },
 };

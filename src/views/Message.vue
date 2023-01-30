@@ -34,11 +34,12 @@ export default {
     async fetchData() {
       return await getMessages(this.page, this.limit);
     },
-    async handleSubmit(data, callback) {
-      const resp = await postMessage(data);
-      callback("感谢您的留言");
-      this.data.rows.unshift(resp);
-      this.data.total++;
+    handleSubmit(data, callback) {
+      postMessage(data).then((resp) => {
+        callback("感谢您的留言");
+        this.data.rows.unshift(resp);
+        this.data.total++;
+      });
     },
     handleScroll(dom) {
       //判断是否正在加载
@@ -49,14 +50,15 @@ export default {
         this.getMoreData();
       }
     },
-    async getMoreData() {
+    getMoreData() {
       if (!this.hasMoreData) return;
       this.page++;
       this.isLoading = true;
-      const moreData = await this.fetchData();
-      this.data.total = moreData.total;
-      this.data.rows = this.data.rows.concat(moreData.rows);
-      this.isLoading = false;
+      this.fetchData().then((moreData) => {
+        this.data.total = moreData.total;
+        this.data.rows = this.data.rows.concat(moreData.rows);
+        this.isLoading = false;
+      });
     },
   },
   created() {
